@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh_Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/3232.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/1616.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="字符串,字符数组," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="zhangjianhe's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="摘要：字符数组以及字符串的操作1、字符数组2、字符串3、字符数组转换为字符串4、练习题">
+<meta name="keywords" content="字符串,字符数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符数组以及字符串的操作">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;16&#x2F;%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C&#x2F;index.html">
+<meta property="og:site_name" content="zhangjianhe&#39;s blog">
+<meta property="og:description" content="摘要：字符数组以及字符串的操作1、字符数组2、字符串3、字符数组转换为字符串4、练习题">
+<meta property="og:locale" content="zh_Hans">
+<meta property="og:updated_time" content="2019-11-16T11:08:52.972Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/16/字符数组以及字符串的操作/"/>
+
+
+
+
+
+  <title>字符数组以及字符串的操作 | zhangjianhe's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangjianhe's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我的个人博客，记录学习！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home                     //首页"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user               //关于"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags                //标签"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th            //分类"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-归档">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive         //归档"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-留言">
+          <a href="/guestbook/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment        //留言"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/16/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangjianhe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangjianhe's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">字符数组以及字符串的操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-16T17:27:43+08:00">
+                2019-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/16/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/16/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/11/16/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C/" class="leancloud_visitors" data-flag-title="字符数组以及字符串的操作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.8k words
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8 min
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a>摘要：</h4><p>字符数组以及字符串的操作<br>1、字符数组<br>2、字符串<br>3、字符数组转换为字符串<br>4、练习题</p>
+<a id="more"></a>
+<h4 id="1、字符数组"><a href="#1、字符数组" class="headerlink" title="1、字符数组"></a>1、字符数组</h4><h5 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数:"></a>常用函数:</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、字符数组拷贝： <span class="function"><span class="keyword">char</span> *<span class="title">strcpy</span><span class="params">( <span class="keyword">char</span> *to, <span class="keyword">const</span> <span class="keyword">char</span> *from )</span></span>; 复制字符串from 中的字符到字符串to，包括空值结束符。返回值为指针to。</span><br><span class="line"><span class="number">2</span>、字符数组长度：<span class="keyword">size_t</span> <span class="built_in">strlen</span>( <span class="keyword">char</span> *str );函数返回字符串str 的长度( 即空值结束符之前字符数目)。</span><br><span class="line"><span class="number">3</span>、字符数组拼接：<span class="function"><span class="keyword">char</span> *<span class="title">strcat</span><span class="params">( <span class="keyword">char</span> *str1, <span class="keyword">const</span> <span class="keyword">char</span> *str2 )</span></span>;函数将字符串str2 连接到str1的末端，并返回指针str1.</span><br><span class="line"><span class="number">4</span>、字符数组比较：<span class="function"><span class="keyword">int</span> <span class="title">strcmp</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> *str1, <span class="keyword">const</span> <span class="keyword">char</span> *str2 )</span></span>; str1&gt;str2 返回值大于<span class="number">1</span> str1==str2返回值等于<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、字符串"><a href="#2、字符串" class="headerlink" title="2、字符串"></a>2、字符串</h4><h5 id="常用函数-1"><a href="#常用函数-1" class="headerlink" title="常用函数:"></a>常用函数:</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(ctrl + alt + L 格式化代码)</span><br><span class="line"><span class="number">1</span>、<span class="built_in">string</span>( size_type length, <span class="keyword">char</span> ch ); 字符串的构造函数</span><br><span class="line"><span class="number">2</span>、<span class="keyword">char</span> str[<span class="number">10005</span>];</span><br><span class="line">   <span class="built_in">scanf</span>(<span class="string">"%s"</span>,str); 不能读入有空格的句子</span><br><span class="line">   gets(str); 可以读入有空格的字符串</span><br><span class="line"><span class="number">3</span>、sting类型的变量需要用<span class="built_in">cin</span>读入;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、字符数组转换为字符串"><a href="#3、字符数组转换为字符串" class="headerlink" title="3、字符数组转换为字符串"></a>3、字符数组转换为字符串</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="built_in">string</span>(<span class="number">12</span>, <span class="string">'A'</span>);   <span class="comment">//字符串构造函数</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *c = s.c_str();   <span class="comment">//字符串转换为常量型字符数组</span></span><br></pre></td></tr></table></figure>
+<h4 id="4、练习题"><a href="#4、练习题" class="headerlink" title="4、练习题"></a>4、练习题</h4><h6 id="1、-打印如下三角"><a href="#1、-打印如下三角" class="headerlink" title="1、 打印如下三角"></a>1、 打印如下三角</h6><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   A</span><br><span class="line">  <span class="keyword">BBB</span></span><br><span class="line"><span class="keyword"> </span>CCCCC</span><br><span class="line"><span class="symbol">DDDDDDD</span></span><br><span class="line"> ...</span><br></pre></td></tr></table></figure>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n; <span class="comment">//行数</span></span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="comment">//控制行 1 3 5 7 ... 2n-1</span></span><br><span class="line">    <span class="keyword">char</span> begin=<span class="string">'A'</span>;</span><br><span class="line">    <span class="keyword">int</span> s=n; <span class="comment">//控制空格的变化呈递减</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="comment">//打印空格</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = s<span class="number">-1</span>; j &gt; <span class="number">0</span>; --j) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        s--;</span><br><span class="line">        <span class="comment">//打印字符</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">2</span>*i<span class="number">-1</span>;j++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c"</span>,begin);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);<span class="comment">//换行</span></span><br><span class="line">        begin++; <span class="comment">//一行打完后字符本身加1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="2、升级版三角形"><a href="#2、升级版三角形" class="headerlink" title="2、升级版三角形"></a>2、升级版三角形</h6><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">A</span></span><br><span class="line">  ABA</span><br><span class="line"> ABCBA</span><br><span class="line">ABCDCBA</span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;<span class="comment">//行</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">char</span> c = <span class="string">'A'</span>;</span><br><span class="line">        <span class="built_in">string</span> space = <span class="built_in">string</span>(n - i, <span class="string">' '</span>);<span class="comment">//空格</span></span><br><span class="line">        <span class="built_in">string</span> str = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">            str = c + str;</span><br><span class="line">            c++;</span><br><span class="line">        &#125;</span><br><span class="line">        c--;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; i; ++j) &#123;</span><br><span class="line">            c--;</span><br><span class="line">            str=c + str;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;space&lt;&lt;str&lt;&lt;<span class="built_in">endl</span>; <span class="comment">//打印一行</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="3、造房子"><a href="#3、造房子" class="headerlink" title="3、造房子"></a>3、造房子</h6><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：2 2</span><br><span class="line">输出：</span><br><span class="line"> +-+-+</span><br><span class="line"> |<span class="string">*</span>|<span class="string">*</span>|</span><br><span class="line"> +-+-+</span><br><span class="line"> |<span class="string">*</span>|<span class="string">*</span>|</span><br></pre></td></tr></table></figure>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m, n;<span class="comment">//m层数</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; m &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n + m; i++) &#123;</span><br><span class="line">        <span class="built_in">string</span> h = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">                h += <span class="string">"+"</span>;</span><br><span class="line">                h += <span class="string">"-"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            h += <span class="string">"+"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">                h += <span class="string">"|"</span>;</span><br><span class="line">                h += <span class="string">"*"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            h += <span class="string">"|"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; h &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="4、对称字符串"><a href="#4、对称字符串" class="headerlink" title="4、对称字符串"></a>4、对称字符串</h6><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">输入:1</span></span><br><span class="line"><span class="section">输出:</span></span><br><span class="line">A</span><br><span class="line"></span><br><span class="line"><span class="section">输入:3</span></span><br><span class="line"><span class="section">输出:</span></span><br><span class="line">ABACABA</span><br><span class="line"></span><br><span class="line"><span class="section">输入:6</span></span><br><span class="line"><span class="section">输出:</span></span><br><span class="line">ABACABADABACABAEABACABADABACABA</span><br></pre></td></tr></table></figure>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;N;</span><br><span class="line">    <span class="keyword">char</span> c=<span class="string">'A'</span>;</span><br><span class="line">    <span class="built_in">string</span> str1=<span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        str1=str1+ c++ +str1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;str1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="5、寻找字符串"><a href="#5、寻找字符串" class="headerlink" title="5、寻找字符串"></a>5、寻找字符串</h6><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">某天，蒜头君和花椰妹在公园里散步，走着走着，我的天！他们各自都捡到了一串漂亮的字符串，然而蒜头君好奇心比较重，他想知道自己的字符串在花椰妹的字符串中出现了多少次，例如花椰妹的字符串为abababa，蒜头君的字符串为aba，那么蒜头君的字符串在花椰妹的字符串中出现了 <span class="number">33</span> 次。蒜头君一向比较傲娇，于是向你请教，你可以帮帮他么？</span><br><span class="line"> </span><br><span class="line">输入格式</span><br><span class="line">输入包含两行，第一行为花椰妹捡到的字符串，第二行为蒜头君捡到的字符串。两个字符串可能包含除换行、回车、\<span class="number">0</span>外的任何字符。两个字符串长度均不大于 <span class="number">10001000</span>。</span><br><span class="line">输出格式</span><br><span class="line">请你帮花椰妹找出他的字符串里出现了多少次蒜头君的字符串。</span><br><span class="line"> </span><br><span class="line">样例输入 <span class="number">1</span></span><br><span class="line">i miss you!</span><br><span class="line">you</span><br><span class="line">样例输出 <span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line">样例输入 <span class="number">2</span></span><br><span class="line">ossosso</span><br><span class="line">osso</span><br><span class="line">样例输出 <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">char</span> s1[<span class="number">1005</span>],s2[<span class="number">1005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fgets(s1,<span class="number">1005</span>,<span class="built_in">stdin</span>);<span class="comment">//windows 上多读入\r\n Linux上多读\n  所以长度要减1</span></span><br><span class="line">    fgets(s2,<span class="number">1005</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    <span class="keyword">int</span> len1=<span class="built_in">strlen</span>(s1)<span class="number">-1</span>,len2=<span class="built_in">strlen</span>(s2)<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;<span class="comment">//存储最终答案</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len1-len2+<span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">bool</span> match=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;len2;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s1[i+j]!=s2[j])&#123;</span><br><span class="line">                match= <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (match)&#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//printf("%s\n",s1);</span></span><br><span class="line">    <span class="comment">//printf("%s\n",s2);</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="6、最后一个单词的长度"><a href="#6、最后一个单词的长度" class="headerlink" title="6、最后一个单词的长度"></a>6、最后一个单词的长度</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">char</span> str[<span class="number">10005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%s"</span>,str)!=EOF); <span class="comment">//str仅保留最后一个单词</span></span><br><span class="line">    <span class="keyword">int</span> len=<span class="built_in">strlen</span>(str);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,str);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,len);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="7、十字图（蓝桥杯真题）"><a href="#7、十字图（蓝桥杯真题）" class="headerlink" title="7、十字图（蓝桥杯真题）"></a>7、十字图（蓝桥杯真题）</h6><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">题目:</span><br><span class="line">小明为某机构设计了一个十字型的徽标（并非红十字会啊），如下所示：</span><br><span class="line"></span><br><span class="line">..<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>..</span><br><span class="line">..<span class="symbol">$</span>...........<span class="symbol">$</span>..</span><br><span class="line"><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>...<span class="symbol">$</span>.......<span class="symbol">$</span>...<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>...<span class="symbol">$</span>.......<span class="symbol">$</span>...<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span></span><br><span class="line">..<span class="symbol">$</span>...........<span class="symbol">$</span>..</span><br><span class="line">..<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>..</span><br><span class="line">对方同时也需要在电脑dos窗口中以字符的形式输出该标志，并能任意控制层数。</span><br><span class="line"></span><br><span class="line">输入格式</span><br><span class="line">一个正整数 n (n&lt;<span class="number">30</span>) 表示要求打印图形的层数。</span><br><span class="line">输出格式</span><br><span class="line">对应包围层数的该标志。</span><br><span class="line">样例输入<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line">样例输出<span class="number">1</span></span><br><span class="line">..<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>..</span><br><span class="line">..<span class="symbol">$</span>...<span class="symbol">$</span>..</span><br><span class="line"><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span></span><br><span class="line">..<span class="symbol">$</span>...<span class="symbol">$</span>..</span><br><span class="line">..<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>..</span><br><span class="line">样例输入<span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">样例输出<span class="number">2</span></span><br><span class="line">..<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>..</span><br><span class="line">..<span class="symbol">$</span>...........<span class="symbol">$</span>..</span><br><span class="line"><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>...<span class="symbol">$</span>.......<span class="symbol">$</span>...<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>...<span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span>...<span class="symbol">$</span>.......<span class="symbol">$</span>...<span class="symbol">$</span></span><br><span class="line"><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>.<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span></span><br><span class="line">..<span class="symbol">$</span>...........<span class="symbol">$</span>..</span><br><span class="line">..<span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span><span class="symbol">$</span>..</span><br><span class="line">提示</span><br><span class="line">请仔细观察样例，尤其要注意句点的数量和输出位置。</span><br></pre></td></tr></table></figure>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">思路：先打印出四分之一，其余用对称赋值即可，寻找基准点。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &lt;iostream&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> &lt;memory.h&gt;</span></span><br><span class="line">using namespace std<span class="comment">;</span></span><br><span class="line"><span class="comment">//行数 1：3+2（1*2）*2=9  3:3+2+（3*2）*2=17  。。。 5+（30*2)*2=125</span></span><br><span class="line">char <span class="keyword">str</span>[<span class="number">130</span>][<span class="number">130</span>]<span class="comment">;</span></span><br><span class="line"><span class="keyword">int</span> main()&#123;</span><br><span class="line">    <span class="keyword">int</span> n<span class="comment">;</span></span><br><span class="line">    cin&gt;&gt;n<span class="comment">;</span></span><br><span class="line">    <span class="keyword">memset</span>(<span class="keyword">str</span>,<span class="string">'$'</span>, sizeof(<span class="keyword">str</span>))<span class="comment">;</span></span><br><span class="line">    <span class="keyword">int</span> h=<span class="number">5</span>+(n*<span class="number">2</span>)*<span class="number">2</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//上面两个角的.</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span><span class="comment">; i &lt; 2; ++i) &#123;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span><span class="comment">;j&lt;2;j++)&#123;</span></span><br><span class="line">            <span class="keyword">str</span>[i][j]=<span class="string">'.'</span><span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=h<span class="number">-1</span><span class="comment">;j&gt;h-3;j--)&#123;</span></span><br><span class="line">            <span class="keyword">str</span>[i][j]=<span class="string">'.'</span><span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//基准 内往外</span></span><br><span class="line">    <span class="keyword">int</span> x=h/<span class="number">2</span> <span class="number">-1</span><span class="comment">;</span></span><br><span class="line">    <span class="keyword">int</span> y=h/<span class="number">2</span> <span class="number">-1</span><span class="comment">;</span></span><br><span class="line">    <span class="comment">//控制打印点的层数 .  n [h/2][h/2]中间</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span><span class="comment">;i&lt;n;i++)&#123;</span></span><br><span class="line">        x=h/<span class="number">2</span><span class="number">-1</span>-i*<span class="number">2</span><span class="comment">;</span></span><br><span class="line">        y=h/<span class="number">2</span><span class="number">-1</span>-i*<span class="number">2</span><span class="comment">;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span><span class="comment">;j&lt;=2;j++)&#123;</span></span><br><span class="line">            <span class="keyword">str</span>[x][y]=<span class="string">'.'</span><span class="comment">;</span></span><br><span class="line">            <span class="keyword">str</span>[x][y-j]=<span class="string">'.'</span><span class="comment">;</span></span><br><span class="line">            <span class="keyword">str</span>[x-j][y]=<span class="string">'.'</span><span class="comment">;</span></span><br><span class="line">            <span class="keyword">int</span> z<span class="comment">;</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span><span class="comment">;k&lt;(i+1)*3+i;k++)&#123;</span></span><br><span class="line">                <span class="keyword">str</span>[x<span class="number">-2</span>][y+k]=<span class="string">'.'</span><span class="comment">;</span></span><br><span class="line">                z=k<span class="comment">;</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span><span class="comment">;k&lt;(i+1)*3+i;k++)&#123;</span></span><br><span class="line">                <span class="keyword">str</span>[x+k][y<span class="number">-2</span>]=<span class="string">'.'</span><span class="comment">;</span></span><br><span class="line">                z=k<span class="comment">;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//复制 前h/2行</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span><span class="comment">; l &lt;= h/2; ++l) &#123;</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span><span class="comment">; i &lt; h/2; ++i) &#123;</span></span><br><span class="line">            <span class="keyword">str</span>[l][h-i<span class="number">-1</span>]=<span class="keyword">str</span>[l][i]<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//上下复制</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span><span class="comment">; m &lt;= h/2; ++m) &#123;</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span><span class="comment">; i &lt; h; ++i) &#123;</span></span><br><span class="line">            <span class="keyword">str</span>[h<span class="number">-1</span>-m][i]=<span class="keyword">str</span>[m][i]<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//打印最终结果</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span><span class="comment">; i &lt; h; ++i) &#123;</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span><span class="comment">; j &lt; h; ++j) &#123;</span></span><br><span class="line">            printf(<span class="string">"%c"</span>,<span class="keyword">str</span>[i][j])<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        printf(<span class="string">"\n"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="8、大数奇偶性判断"><a href="#8、大数奇偶性判断" class="headerlink" title="8、大数奇偶性判断"></a>8、大数奇偶性判断</h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">大数奇偶性判断</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> num[<span class="number">1005</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,num);</span><br><span class="line">    <span class="keyword">int</span> len=<span class="built_in">strlen</span>(num);</span><br><span class="line">    <span class="keyword">int</span> temp=num[len<span class="number">-1</span>]-<span class="string">'0'</span>;<span class="comment">//字符转数字</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"temp=%d\n"</span>,temp);</span><br><span class="line">    <span class="keyword">if</span>(temp%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="zhangjianhe WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="zhangjianhe Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    zhangjianhe
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://yoursite.com/2019/11/16/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C/" title="字符数组以及字符串的操作">http://yoursite.com/2019/11/16/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E4%BB%A5%E5%8F%8A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <div>
+	
+	<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+	
+    </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag"><i class="fa fa-tag"></i> 字符串</a>
+          
+            <a href="/tags/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/" rel="tag"><i class="fa fa-tag"></i> 字符数组</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/19/%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%AC%AC%E4%B8%83%E5%B1%8A%E7%9C%81%E8%B5%9BB%E7%BB%84/" rel="next" title="蓝桥杯第七届省赛B组">
+                <i class="fa fa-chevron-left"></i> 蓝桥杯第七届省赛B组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="zhangjianhe" />
+            
+              <p class="site-author-name" itemprop="name">zhangjianhe</p>
+              <p class="site-description motion-element" itemprop="description">我爱编程，我爱学习！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/komsoi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:2895193286@qq.com.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.baidu.com" title="百度" target="_blank">百度</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.w3school.com.cn/" title="W3school" target="_blank">W3school</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tool.lu/" title="程序员工具箱" target="_blank">程序员工具箱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#摘要："><span class="nav-number">1.</span> <span class="nav-text">摘要：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、字符数组"><span class="nav-number">2.</span> <span class="nav-text">1、字符数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#常用函数"><span class="nav-number">2.1.</span> <span class="nav-text">常用函数:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、字符串"><span class="nav-number">3.</span> <span class="nav-text">2、字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#常用函数-1"><span class="nav-number">3.1.</span> <span class="nav-text">常用函数:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、字符数组转换为字符串"><span class="nav-number">4.</span> <span class="nav-text">3、字符数组转换为字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、练习题"><span class="nav-number">5.</span> <span class="nav-text">4、练习题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1、-打印如下三角"><span class="nav-number">5.0.1.</span> <span class="nav-text">1、 打印如下三角</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2、升级版三角形"><span class="nav-number">5.0.2.</span> <span class="nav-text">2、升级版三角形</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3、造房子"><span class="nav-number">5.0.3.</span> <span class="nav-text">3、造房子</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4、对称字符串"><span class="nav-number">5.0.4.</span> <span class="nav-text">4、对称字符串</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5、寻找字符串"><span class="nav-number">5.0.5.</span> <span class="nav-text">5、寻找字符串</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#6、最后一个单词的长度"><span class="nav-number">5.0.6.</span> <span class="nav-text">6、最后一个单词的长度</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#7、十字图（蓝桥杯真题）"><span class="nav-number">5.0.7.</span> <span class="nav-text">7、十字图（蓝桥杯真题）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#8、大数奇偶性判断"><span class="nav-number">5.0.8.</span> <span class="nav-text">8、大数奇偶性判断</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+	    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=92565&auto=1&height=66"></iframe>
+          
+        </div>
+      
+	
+	
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">komsoi</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">6.3k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">symbols_count_time.count_total:</span>
+    
+	<span title="Site words total count">
+     6.3k字 </span>
+    <!--<span title="symbols_count_time.count_total">17k</span>-->
+  
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'WJdYaLjCJRi8zCSUDmglGmSG-gzGzoHsz',
+        appKey: 'BbSyhdW2MgM2pWaJbG9sFzVk',
+        placeholder: '说点什么吧！',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("WJdYaLjCJRi8zCSUDmglGmSG-gzGzoHsz", "BbSyhdW2MgM2pWaJbG9sFzVk");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"symbols":true,"time":false,"total_symbols":true,"total_time":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
